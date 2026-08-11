@@ -1,0 +1,3 @@
+import "./globals.css"; import Link from "next/link";
+export const metadata={title:"Islamic Academy",description:"Онлайн-академия исламских наук"};
+export default function Layout({children}:{children:React.ReactNode}){return <html lang="ru" dir="rtl"><body><header className="nav"><div className="wrap navin"><Link className="brand" href="/">الأكاديمية الإسلامية</Link><nav><Link href="/courses">Курсы</Link><Link href="/library">Библиотека</Link><Link href="/dashboard">Кабинет</Link><Link className="btn" href="/auth">Войти</Link></nav></div></header>{children}<footer className="footer"><div className="wrap">Islamic Academy</div></footer></body></html>}

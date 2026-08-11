@@ -1,0 +1,3 @@
+import Link from "next/link";
+const data=[["العقيدة","Основы исламского вероубеждения"],["الفقه","Фикх"],["الحديث","Хадис"],["النحو","Арабская грамматика"],["التفسير","Тафсир"],["علوم القرآن","Коранические науки"]];
+export default function Courses(){return <main className="wrap section"><h1>Программы обучения</h1><div className="grid">{data.map(([a,b])=><div className="card" key={a}><b>{a}</b><h2>{b}</h2><p className="muted">Видео · PDF · тесты · прогресс</p><Link className="btn" href="/auth">Записаться</Link></div>)}</div></main>}

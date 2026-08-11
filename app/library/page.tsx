@@ -1,0 +1,1 @@
+export default function Library(){return <main className="wrap section"><h1>Библиотека</h1><div className="grid"><div className="card"><h2>PDF и книги</h2><p className="muted">Материалы академии.</p></div><div className="card"><h2>Видео</h2><p className="muted">Видео-уроки.</p></div></div></main>}

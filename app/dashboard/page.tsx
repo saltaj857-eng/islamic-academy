@@ -1,0 +1,1 @@
+export default function Dashboard(){return <main className="wrap section"><h1>Личный кабинет</h1><div className="grid"><div className="card"><h2>Мои курсы</h2><p>Ваши программы обучения.</p></div><div className="card"><h2>Прогресс</h2><p>Уроки · тесты · сертификаты.</p></div><div className="card"><h2>Профиль</h2><p>Настройки аккаунта.</p></div></div></main>}
