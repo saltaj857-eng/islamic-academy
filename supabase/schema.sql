@@ -1,0 +1,11 @@
+create extension if not exists pgcrypto;
+create table if not exists public.profiles(id uuid primary key references auth.users(id) on delete cascade,full_name text,role text not null default 'student' check(role in('student','teacher','admin')),created_at timestamptz default now());
+create table if not exists public.courses(id uuid primary key default gen_random_uuid(),title text not null,slug text unique not null,description text,published boolean default false,created_at timestamptz default now());
+create table if not exists public.lessons(id uuid primary key default gen_random_uuid(),course_id uuid references public.courses(id) on delete cascade,title text not null,description text,video_path text,pdf_path text,position int default 0);
+create table if not exists public.enrollments(id uuid primary key default gen_random_uuid(),student_id uuid references public.profiles(id) on delete cascade,course_id uuid references public.courses(id) on delete cascade,created_at timestamptz default now(),unique(student_id,course_id));
+create table if not exists public.lesson_progress(id uuid primary key default gen_random_uuid(),student_id uuid references public.profiles(id) on delete cascade,lesson_id uuid references public.lessons(id) on delete cascade,completed boolean default false,updated_at timestamptz default now(),unique(student_id,lesson_id));
+alter table public.profiles enable row level security; alter table public.courses enable row level security; alter table public.lessons enable row level security; alter table public.enrollments enable row level security; alter table public.lesson_progress enable row level security;
+create policy "published courses" on public.courses for select using(published=true);
+create policy "own profile" on public.profiles for select using(auth.uid()=id);
+create policy "own enrollments" on public.enrollments for select using(auth.uid()=student_id);
+create policy "own progress" on public.lesson_progress for all using(auth.uid()=student_id) with check(auth.uid()=student_id);
